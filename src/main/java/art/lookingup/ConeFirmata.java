@@ -45,52 +45,53 @@ public class ConeFirmata {
     try {
       logger.info("Initializing Firmata on " + portName);
       device.start(); // initiate communication to the device
-      device.ensureInitializationIsDone(); // wait for initialization is done
+      // device.ensureInitializationIsDone(); // wait for initialization is done
 
-      device.sendMessage(FirmataMessageFactory.setSamplingInterval(100));
+      // device.sendMessage(FirmataMessageFactory.setSamplingInterval(100));
       logger.info("Device num pins: " + device.getPinsCount());
 
-      for (int i = startPin; i < (startPin + numPins - 1) && i < device.getPinsCount(); i++) {
-        Pin pin = device.getPin(startPin);
-        pin.setMode(Pin.Mode.INPUT);
-      }
+      // for (int i = startPin; i < (startPin + numPins - 1) && i < device.getPinsCount(); i++) {
+      //   Pin pin = device.getPin(startPin);
+      //   pin.setMode(Pin.Mode.INPUT);
+      // }
 
-      device.addEventListener(new IODeviceEventListener() {
-        @Override
-        public void onStart(IOEvent event) {
-          // since this moment we are sure that the device is initialized
-          // so we can hide initialization spinners and begin doing cool stuff
-          logger.info("Firmata device is ready");
-        }
+      // device.addEventListener(new IODeviceEventListener() {
+      //   @Override
+      //   public void onStart(IOEvent event) {
+      //     // since this moment we are sure that the device is initialized
+      //     // so we can hide initialization spinners and begin doing cool stuff
+      //     logger.info("Firmata device is ready");
+      //   }
 
-        @Override
-        public void onStop(IOEvent event) {
-          // since this moment we are sure that the device is properly shut down
-          logger.info("Firmata device has been stopped");
-        }
+      //   @Override
+      //   public void onStop(IOEvent event) {
+      //     // since this moment we are sure that the device is properly shut down
+      //     logger.info("Firmata device has been stopped");
+      //   }
 
-        @Override
-        public void onPinChange(IOEvent event) {
-          // here we react to changes of pins' state
-          Pin pin = event.getPin();
-          if (pin.getIndex() >= startPin && pin.getIndex() < (startPin + numPins)) {
-            // System.out.println(String.format("Pin %d got a value of %d", pin.getIndex(), pin.getValue()));
-            int index = pin.getIndex() - startPin;
-            pinData[index] = pin.getValue();
-            pinParams.get(index).setValue(pinData[index]);
-          }
-        }
+      //   @Override
+      //   public void onPinChange(IOEvent event) {
+      //     // here we react to changes of pins' state
+      //     Pin pin = event.getPin();
+      //     logger.info("Pin change! " + pin.getIndex());
+      //     if (pin.getIndex() >= startPin && pin.getIndex() < (startPin + numPins)) {
+      //       // System.out.println(String.format("Pin %d got a value of %d", pin.getIndex(), pin.getValue()));
+      //       int index = pin.getIndex() - startPin;
+      //       pinData[index] = pin.getValue();
+      //       pinParams.get(index).setValue(pinData[index]);
+      //     }
+      //   }
 
-        @Override
-        public void onMessageReceive(IOEvent event, String message) {
-          // here we react to receiving a text message from the device
-          logger.info("Firmata: " + message);
-        }
-      });
+      //   @Override
+      //   public void onMessageReceive(IOEvent event, String message) {
+      //     // here we react to receiving a text message from the device
+      //     logger.info("Firmata: " + message);
+      //   }
+      // });
     } catch (IOException ioex) {
       logger.info("Firmata IOException ioex: " + ioex.getMessage());
-    } catch (InterruptedException iex) {
-      logger.info("Firmata: Interrupted Exception: " + iex.getMessage());
+    // } catch (InterruptedException iex) {
+    //   logger.info("Firmata: Interrupted Exception: " + iex.getMessage());
     }
 
 
