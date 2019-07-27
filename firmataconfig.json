@@ -1,6 +1,6 @@
 {
   "frmport": {
-    "v": "COM3",
+    "v": "/dev/ttyACM0",
     "t": 0
   },
   "pin_5": {

@@ -25,7 +25,7 @@ public class UIFirmata extends UIConfig {
     int contentWidth = (int)ui.leftPane.global.getContentWidth();
     this.lx = lx;
 
-    registerStringParameter(FIRMATA_PORT, "COM3");
+    registerStringParameter(FIRMATA_PORT, "/dev/ttyACM0");
     registerDiscreteParameter(START_PIN, 8, 0, 40);
 
     for (int i = 0; i < numPins; i++) {
