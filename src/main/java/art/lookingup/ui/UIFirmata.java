@@ -11,12 +11,10 @@ import java.util.List;
 
 public class UIFirmata extends UIConfig {
   public static final String FIRMATA_PORT = "frmport";
-  public static final String START_PIN = "start";
-  public static final String PIN_BASE = "pin_";
-
   public static final String title = "firmata";
   public static final String filename = "firmataconfig.json";
-  public static final int numPins = 16;
+  // https://stackoverflow.com/a/6802502
+  public static final Map<String, String> dancefloor_tiles = createDancefloorTiles();
   public LX lx;
   private boolean parameterChanged = false;
 
@@ -26,7 +24,6 @@ public class UIFirmata extends UIConfig {
     this.lx = lx;
 
     registerStringParameter(FIRMATA_PORT, "COM3");
-    registerDiscreteParameter(START_PIN, 8, 0, 40);
 
     for (int i = 0; i < numPins; i++) {
       registerCompoundParameter(PIN_BASE + i, 0f, 0f, 1f);
@@ -34,6 +31,11 @@ public class UIFirmata extends UIConfig {
     save();
 
     buildUI(ui);
+  }
+
+  public static Map<String, String> createDancefloorTiles() {
+    Map<String, String> dancefloorTiles = new HashMap<String, String>();
+    return dancefloorTiles;
   }
 
   /**
