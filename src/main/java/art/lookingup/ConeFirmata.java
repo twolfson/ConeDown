@@ -43,7 +43,7 @@ public class ConeFirmata {
     // subscribe to events using device.addEventListener(...);
     // and/or device.getPin(n).addEventListener(...);
     try {
-      logger.info("Initializing Firmata");
+      logger.info("Initializing Firmata on " + portName);
       device.start(); // initiate communication to the device
       device.ensureInitializationIsDone(); // wait for initialization is done
 
